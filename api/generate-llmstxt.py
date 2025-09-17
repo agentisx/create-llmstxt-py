@@ -260,8 +260,8 @@ def main():
     )
     parser.add_argument(
         "--output-dir", 
-        default=".", 
-        help="Directory to save output files (default: current directory)"
+        default="output", 
+        help="Directory to save output files (default: output folder)"
     )
     parser.add_argument(
         "--firecrawl-api-key",
@@ -320,13 +320,13 @@ def main():
         from urllib.parse import urlparse
         domain = urlparse(args.url).netloc.replace("www.", "")
         
-        # Save llms.txt
+        # Save llms.txt in output folder
         llmstxt_path = os.path.join(args.output_dir, f"{domain}-llms.txt")
         with open(llmstxt_path, "w", encoding="utf-8") as f:
             f.write(result["llmstxt"])
         logger.info(f"Saved llms.txt to {llmstxt_path}")
-        
-        # Save llms-full.txt if requested
+
+        # Save llms-full.txt in output folder if requested
         if not args.no_full_text:
             llms_fulltxt_path = os.path.join(args.output_dir, f"{domain}-llms-full.txt")
             with open(llms_fulltxt_path, "w", encoding="utf-8") as f:
